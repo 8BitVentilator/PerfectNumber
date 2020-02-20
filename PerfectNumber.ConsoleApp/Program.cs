@@ -7,14 +7,11 @@ namespace PerfectNumber.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var start = 1;
-            var end = 5;
+            var start = 0;
+            var end = 1000;
+            var numberOfCores = Environment.ProcessorCount;
 
-            var bucketGenerator = new BucketGenerator();
-            var bandwidthGenerator = new BandwidthGenerator();
-
-            var buckets = bucketGenerator.Generate(end - start, Environment.ProcessorCount);
-            var bandwidths = bandwidthGenerator.Generate(buckets, start).ToArray();
+            var bandwidths = new BandwidthCalculator().Calculate(start, end, numberOfCores);
         }
     }
 }

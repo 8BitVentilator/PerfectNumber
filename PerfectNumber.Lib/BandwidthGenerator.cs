@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace PerfectNumber.Lib
 {
-    public sealed class BandwidthGenerator
+    internal sealed class BandwidthGenerator
     {
         public IEnumerable<Bandwidth> Generate(IEnumerable<BigInteger> buckets, BigInteger start) =>
             buckets
