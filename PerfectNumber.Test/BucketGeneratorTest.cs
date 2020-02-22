@@ -35,6 +35,12 @@ namespace PerfectNumber.Test
                     new BigInteger(3),
                     4,
                     new BigInteger[] { 1, 1, 1 }
+                },
+                new object[]
+                {
+                    new BigInteger(2),
+                    4,
+                    new BigInteger[] { 1, 1 }
                 }
             };
     }

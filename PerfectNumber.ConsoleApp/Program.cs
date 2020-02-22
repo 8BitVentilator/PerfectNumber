@@ -1,5 +1,7 @@
 ﻿using PerfectNumber.Lib;
 using System;
+using System.Diagnostics;
+using System.Linq;
 
 namespace PerfectNumber.ConsoleApp
 {
@@ -8,7 +10,7 @@ namespace PerfectNumber.ConsoleApp
         static void Main(string[] args)
         {
             var validator = new PerfectNumberValidator();
-            Console.WriteLine(validator.Validate(2305843008139952128));
+            var asd = validator.Validate(6);
         }
     }
 }

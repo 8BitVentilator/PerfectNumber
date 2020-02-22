@@ -9,7 +9,9 @@ namespace PerfectNumber.Lib
         {
             for (var x = bandwidth.Start; x <= bandwidth.End; x++)
                 if (number % x == 0)
+                {
                     yield return x;
+                }
         }
     }
 }

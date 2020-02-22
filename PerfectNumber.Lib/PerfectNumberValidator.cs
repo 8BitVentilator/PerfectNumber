@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -16,8 +17,7 @@ namespace PerfectNumber.Lib
     public sealed class PerfectNumberValidator
     {
         private readonly PerfectNumberValidatorConfiguration configuration;
-        private readonly BucketGenerator bucketGenerator = new BucketGenerator();
-        private readonly BandwidthGenerator bandwidthGenerator = new BandwidthGenerator();
+        private readonly BandwidthCalculator bandwidthCalculator = new BandwidthCalculator();
         private readonly DivisorCalculator divisorCalculator = new DivisorCalculator();
 
         public PerfectNumberValidator()
@@ -31,16 +31,16 @@ namespace PerfectNumber.Lib
 
         public bool Validate(BigInteger number)
         {
-            var sqrt = (BigInteger)number.Sqrt();
-            var buckets = this.bucketGenerator.Generate(sqrt - 2, configuration.NumberOfCores);
-            var bandwidths = this.bandwidthGenerator.Generate(buckets, 2);
-            var divisors = bandwidths.Select(bandwidth => divisorCalculator.Calculate(bandwidth, number))
-                                     .AsParallel()
-                                     .SelectMany(x => x);
-
-            return Sum(divisors, number) == number && number != 1;
+            Console.WriteLine($"Starte Ermittlung von {number}");
+            return Sum(this.GetDivisors(number), number) == number && number != 1;
         }
 
+        private IEnumerable<BigInteger> GetDivisors(BigInteger number)
+            => this.bandwidthCalculator
+                .Calculate(2, (BigInteger)number.Sqrt(), configuration.NumberOfCores)
+                .AsParallel()
+                .SelectMany(bandwidth => divisorCalculator.Calculate(bandwidth, number));
+                
         private static BigInteger Sum(IEnumerable<BigInteger> enumerable, BigInteger number)
         {
             BigInteger sum = 1;
