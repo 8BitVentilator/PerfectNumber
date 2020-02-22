@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace PerfectNumber.Lib
 {
-    internal sealed class BucketGenerator
+    public sealed class BucketGenerator
     {
         public IEnumerable<BigInteger> Generate(BigInteger range, int countOfBuckets) =>
             Enumerable
