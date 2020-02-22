@@ -9,6 +9,7 @@ namespace PerfectNumber.Lib
         public IEnumerable<BigInteger> Generate(BigInteger range, int countOfBuckets) =>
             Enumerable
                 .Range(0, countOfBuckets)
-                .Select(bucket => range / countOfBuckets + (bucket < range % countOfBuckets ? 1 : 0));
+                .Select(bucket => range / countOfBuckets + (bucket < range % countOfBuckets ? 1 : 0))
+                .Where(x => x > 0);
     }
 }

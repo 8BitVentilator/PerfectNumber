@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace PerfectNumber.Lib
 {
-    public class BandwidthCalculator
+    public sealed class BandwidthCalculator
     {
         private readonly BucketGenerator bucketGenerator = new BucketGenerator();
         private readonly BandwidthGenerator bandwidthGenerator = new BandwidthGenerator();
