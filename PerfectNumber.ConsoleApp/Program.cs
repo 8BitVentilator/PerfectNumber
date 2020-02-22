@@ -1,7 +1,6 @@
 ﻿using PerfectNumber.Lib;
 using System;
 using System.Diagnostics;
-using System.Linq;
 
 namespace PerfectNumber.ConsoleApp
 {
@@ -9,8 +8,16 @@ namespace PerfectNumber.ConsoleApp
     {
         static void Main(string[] args)
         {
+            //var number = 6;
+            var number = 2305843008139952128;
             var validator = new PerfectNumberValidator();
-            var asd = validator.Validate(6);
+            var sw = new Stopwatch();
+            sw.Start();
+            var isPerfect = validator.Validate(number);
+            sw.Stop();
+
+            Console.WriteLine($"{number} ist{(isPerfect ? " " : " nicht ")}perfekt.");
+            Console.WriteLine($"Zeit: {sw.Elapsed}");
         }
     }
 }

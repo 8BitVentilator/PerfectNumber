@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 
@@ -29,29 +28,19 @@ namespace PerfectNumber.Lib
             this.configuration = configuration;
         }
 
-        public bool Validate(BigInteger number)
-        {
-            Console.WriteLine($"Starte Ermittlung von {number}");
-            return Sum(this.GetDivisors(number), number) == number && number != 1;
-        }
+        public bool Validate(BigInteger number) 
+            => Sum(this.GetDivisors(number), number) == number && number != 1;
 
         private IEnumerable<BigInteger> GetDivisors(BigInteger number)
             => this.bandwidthCalculator
                 .Calculate(2, (BigInteger)number.Sqrt(), configuration.NumberOfCores)
                 .AsParallel()
                 .SelectMany(bandwidth => divisorCalculator.Calculate(bandwidth, number));
-                
-        private static BigInteger Sum(IEnumerable<BigInteger> enumerable, BigInteger number)
-        {
-            BigInteger sum = 1;
-            foreach (var i in enumerable)
-            {
-                sum += i * i != number
-                        ? i + number / i
-                        : i;
-            }
 
-            return sum;
-        }
+        private static BigInteger Sum(IEnumerable<BigInteger> divisors, BigInteger number) 
+            => divisors.Aggregate(new BigInteger(1), (sum, divisor) 
+                => sum += divisor * divisor != number 
+                    ? divisor + number / divisor
+                    : divisor);
     }
 }
