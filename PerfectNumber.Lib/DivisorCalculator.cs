@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace PerfectNumber.Lib
 {
-    public class DivisorCalculator
+    internal class DivisorCalculator
     {
         public IEnumerable<BigInteger> Calculate(Bandwidth bandwidth, BigInteger number)
         {

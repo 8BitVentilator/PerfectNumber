@@ -2,7 +2,7 @@
 
 namespace PerfectNumber.Lib
 {
-    public sealed class Bandwidth
+    internal sealed class Bandwidth
     {
         public BigInteger Start { get; }
         public BigInteger End { get; }

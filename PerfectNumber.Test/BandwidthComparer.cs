@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PerfectNumber.Test
 {
-    public class BandwidthComparer : IEqualityComparer<Bandwidth>
+    internal class BandwidthComparer : IEqualityComparer<Bandwidth>
     {
         public bool Equals([AllowNull] Bandwidth x, [AllowNull] Bandwidth y)
         {

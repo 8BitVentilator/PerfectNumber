@@ -9,7 +9,7 @@ namespace PerfectNumber.Test
     {
         [Theory]
         [MemberData(nameof(TestData))]
-        public void Generate(IEnumerable<BigInteger> buckets, BigInteger start, IEnumerable<Bandwidth> expected)
+        internal void Generate(IEnumerable<BigInteger> buckets, BigInteger start, IEnumerable<Bandwidth> expected)
         {
             var generator = new BandwidthGenerator();
             Assert.Equal(expected, generator.Generate(buckets, start), new BandwidthComparer());
